@@ -1,0 +1,13 @@
+{
+  "name": "bun-test-parallel-timeout-repro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "repro:control": "bun test --parallel=2 --timeout=1000 ./repro-1-parallel-timeout/async-alloc.test.ts ./repro-1-parallel-timeout/pass.test.ts",
+    "repro:file-query": "bun test ./repro-2-file-url-query-mock/file-url-query.test.ts",
+    "repro:mock-query": "bun test ./repro-2-file-url-query-mock/mock-module-file-query.test.ts",
+    "repro:cpu:safe": "pwsh -File ./scripts/run-safe.ps1 -MaxSeconds 6 -MaxMemoryMB 1536 -BunArgs test,--parallel=2,--timeout=1000,./repro-1-parallel-timeout/timeout-cpu.test.ts,./repro-1-parallel-timeout/pass.test.ts",
+    "repro:alloc:safe": "pwsh -File ./scripts/run-safe.ps1 -MaxSeconds 6 -MaxMemoryMB 1536 -BunArgs test,--parallel=2,--timeout=1000,./repro-1-parallel-timeout/timeout-alloc.test.ts,./repro-1-parallel-timeout/pass.test.ts"
+  }
+}
